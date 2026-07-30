@@ -1,0 +1,358 @@
+/* ============================================
+   DESIGN TOKENS
+   Palette: railway-inspired
+   --navy   : locomotive night sky (primary dark)
+   --steel  : train-body steel blue (secondary)
+   --amber  : signal lamp amber (accent / CTA)
+   --track  : track-side green (success / live status)
+   --paper  : warm platform-board off-white (background)
+   Type: Rajdhani for headings (named after the Rajdhani Express — a deliberate,
+         subject-grounded choice), Inter for body text, IBM Plex Mono for data
+         (PNR numbers, train numbers, fares, seat numbers) to feel like a
+         departure board / ticket printout.
+   ============================================ */
+:root {
+    --navy: #16305A;
+    --navy-soft: #1F3E6E;
+    --steel: #2E6DB4;
+    --amber: #E8871E;
+    --amber-soft: #FCEBD3;
+    --track: #1E8449;
+    --paper: #FFFFFF;
+    --card: #FFFFFF;
+    --ink: #16202B;
+    --ink-soft: #6B7580;
+    --line: #ECECEC;
+    --danger: #D6524F;
+
+    /* Pastel tile colors — matches the "More Offerings" grid style */
+    --tile-pink-bg: #FCE7EA;   --tile-pink-fg: #E24C6D;
+    --tile-green-bg: #E3F6E8;  --tile-green-fg: #1E8449;
+    --tile-blue-bg: #E1F0FC;   --tile-blue-fg: #2E6DB4;
+    --tile-cream-bg: #FBEFDC;  --tile-cream-fg: #D99A2B;
+    --tile-lavender-bg: #E9E6F9; --tile-lavender-fg: #6C5CE7;
+    --tile-gray-bg: #ECECEC;   --tile-gray-fg: #4A4A4A;
+    --tile-rose-bg: #FBE2E2;   --tile-rose-fg: #D6524F;
+    --tile-dark-bg: #4B4468;   --tile-dark-fg: #FFFFFF;
+
+    --font-display: 'Rajdhani', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    --radius: 10px;
+    --shadow: 0 4px 16px rgba(11, 31, 58, 0.08);
+}
+
+body {
+    margin: 0;
+    font-family: var(--font-body);
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 700; color: var(--navy); margin: 0 0 .4em; }
+
+a { color: inherit; text-decoration: none; }
+
+.mono { font-family: var(--font-mono); }
+
+/* ---------- Demo banner ---------- */
+.demo-banner {
+    background: var(--amber);
+    color: var(--navy);
+    text-align: center;
+    font-size: .78rem;
+    font-weight: 600;
+    padding: 6px 10px;
+    letter-spacing: .02em;
+}
+
+/* ---------- Top bar (brand only — navigation now lives in the bottom tab bar) ---------- */
+/* ---------- Top bar (brand only — navigation now lives in the bottom tab bar) ---------- */
+.topbar {
+    background: #fff;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 22px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-bottom: 1px solid var(--line);
+}
+.brand { display: flex; align-items: center; gap: 2px; }
+.brand-mark {
+    background: var(--tile-blue-bg);
+    color: var(--steel);
+    font-family: var(--font-display);
+    font-weight: 700;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: .82rem;
+    margin-right: 10px;
+}
+.brand-name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 700; letter-spacing: .01em; color: var(--navy); }
+.brand-name .accent { color: var(--steel); }
+.topbar-bell {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--line); background: #fff;
+    display: flex; align-items: center; justify-content: center; font-size: 1.1rem;
+}
+/* ---------- Bottom tab bar (mobile-app style) ---------- */
+body { padding-bottom: 78px; } /* room for the fixed bottom nav */
+.bottom-nav {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
+    background: #2F6BFF;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+    box-shadow: 0 -4px 16px rgba(11,31,58,.18);
+}
+.bn-item {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    background: none; border: none; cursor: pointer;
+    color: #D6E2FF; font-family: var(--font-body); font-size: .68rem; font-weight: 600;
+    padding: 4px 10px; flex: 1;
+}
+.bn-item svg { width: 22px; height: 22px; color: #D6E2FF; }
+.bn-item.active, .bn-item:hover { color: #fff; }
+.bn-item.active svg, .bn-item:hover svg { color: #fff; }
+
+/* ---------- Slide-up "Menu" sheet ---------- */
+.menu-overlay {
+    position: fixed; inset: 0; background: rgba(11,31,58,.55);
+    z-index: 65; display: none;
+}
+.menu-overlay.show { display: block; }
+.menu-sheet {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 70;
+    background: var(--paper);
+    border-radius: 20px 20px 0 0;
+    padding: 10px 22px 26px;
+    transform: translateY(100%);
+    transition: transform .25s ease;
+    box-shadow: 0 -8px 24px rgba(11,31,58,.2);
+}
+.menu-sheet.show { transform: translateY(0); }
+.menu-sheet-handle { width: 42px; height: 4px; background: var(--line); border-radius: 4px; margin: 6px auto 14px; }
+.menu-sheet h3 { margin-bottom: 14px; }
+.menu-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.menu-grid-item {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    background: var(--card); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px 8px; font-size: .82rem; font-weight: 600; color: var(--navy); text-align: center;
+}
+.menu-grid-item .icon { font-size: 1.5rem; }
+.menu-grid-item:hover { border-color: var(--amber); background: var(--amber-soft); }
+
+/* ---------- Layout helpers ---------- */
+main { max-width: 1080px; margin: 0 auto; padding: 32px 24px 64px; }
+.section-eyebrow { font-family: var(--font-mono); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--amber); font-weight: 600; }
+
+/* ---------- Hero (Home) ---------- */
+.hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--steel) 100%);
+    color: #fff;
+    border-radius: 16px;
+    padding: 48px 40px;
+    margin-bottom: 28px;
+    position: relative;
+    overflow: hidden;
+}
+.hero h1 { color: #fff; font-size: 2.4rem; max-width: 640px; }
+.hero p { color: #D6E0EA; max-width: 520px; margin-bottom: 20px; }
+.hero .rail-line {
+    position: absolute; left: 0; right: 0; bottom: 28px; height: 2px;
+    background: repeating-linear-gradient(90deg, var(--amber) 0 18px, transparent 18px 30px);
+    opacity: .55;
+}
+/* ---------- Home: greeting + Journey Planner ---------- */
+.greeting { font-size: .95rem; color: var(--ink-soft); margin-bottom: 4px; }
+.planner-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 14px; margin-top: 16px; margin-bottom: 30px; }
+.planner-card { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.planner-card .art {
+    width: 100%; aspect-ratio: 1.3/1; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 2.6rem;
+}
+.planner-card .art.reserved { background: linear-gradient(135deg, #CFE3F7, #9DBEE8); }
+.planner-card .art.unreserved { background: linear-gradient(135deg, #F4CFDA, #E39BAE); }
+.planner-card .art.platform { background: linear-gradient(135deg, #F6D9A8, #E7A85C); }
+.planner-card .art img { width: 100%; height: 100%; object-fit: cover; border-radius: 16px; }
+.planner-card .planner-label { font-family: var(--font-display); font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+
+/* ---------- Home: More Offerings (pastel tile grid) ---------- */
+.offerings-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 14px; margin-top: 16px; margin-bottom: 30px; }
+.offering-tile {
+    display: flex; flex-direction: column; align-items: center; gap: 10px;
+    text-align: center; padding: 4px;
+}
+.offering-tile .art {
+    width: 64px; height: 64px; border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; font-size: 1.6rem;
+    transition: transform .15s;
+}
+.offering-tile:hover .art { transform: translateY(-2px); }
+.offering-tile .offering-label { font-size: .85rem; font-weight: 600; color: var(--navy); }
+
+/* ---------- Home: Do You Know carousel ---------- */
+.know-scroll { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 10px; margin-top: 14px; scrollbar-width: thin; }
+.know-card { flex: 0 0 220px; }
+.know-card .art {
+    width: 100%; height: 130px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center; font-size: 2.2rem;
+    margin-bottom: 8px;
+}
+.know-card p { font-size: .82rem; color: var(--ink-soft); line-height: 1.4; margin: 0; }
+
+/* ---------- Quick action tiles ---------- */
+.tile-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 14px; margin-top: 24px; }
+.tile {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 18px; display: flex; flex-direction: column; gap: 8px; transition: .15s;
+}
+.tile:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--amber); }
+.tile .icon { font-size: 1.5rem; }
+.tile .label { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; color: var(--navy); }
+.tile .sub { font-size: .82rem; color: var(--ink-soft); }
+
+/* ---------- Split-flap / departure-board component (signature element) ---------- */
+.flap-board {
+    background: var(--navy);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    font-family: var(--font-mono);
+}
+.flap-field { display: flex; flex-direction: column; gap: 4px; }
+.flap-field .flap-label { font-size: .66rem; color: var(--amber); letter-spacing: .1em; text-transform: uppercase; }
+.flap-field .flap-value {
+    color: #fff; font-size: 1.15rem; font-weight: 600;
+    background: #0006; padding: 4px 10px; border-radius: 4px;
+    border: 1px solid #ffffff22;
+}
+
+/* ---------- Cards ---------- */
+.card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+.card + .card { margin-top: 14px; }
+
+/* ---------- Forms ---------- */
+.form-row { display: flex; gap: 14px; flex-wrap: wrap; }
+.field { display: flex; flex-direction: column; gap: 6px; flex: 1; min-width: 180px; }
+.field label { font-size: .8rem; font-weight: 600; color: var(--ink-soft); }
+.field input, .field select, .field textarea {
+    font-family: var(--font-body); font-size: .95rem; padding: 10px 12px;
+    border: 1px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+}
+.field input:focus, .field select:focus, .field textarea:focus { outline: 2px solid var(--amber); outline-offset: 1px; border-color: var(--amber); }
+
+/* ---------- Buttons ---------- */
+.btn {
+    font-family: var(--font-display); font-weight: 600; font-size: 1rem;
+    padding: 11px 22px; border-radius: 8px; border: none; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; transition: .15s;
+}
+.btn-primary { background: var(--amber); color: var(--navy); }
+.btn-primary:hover { background: #d67a13; }
+.btn-outline { background: transparent; color: var(--navy); border: 1.5px solid var(--navy); }
+.btn-outline:hover { background: var(--navy); color: #fff; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+
+/* ---------- Train result row ---------- */
+.train-row {
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 16px; padding: 18px; border-bottom: 1px solid var(--line);
+}
+.train-row:last-child { border-bottom: none; }
+.train-meta .num { font-family: var(--font-mono); font-size: .78rem; color: var(--ink-soft); }
+.train-meta .name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--navy); }
+.train-times { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: .95rem; }
+.train-times .dur { font-size: .72rem; color: var(--ink-soft); text-align: center; }
+.class-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.class-chip {
+    border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; cursor: pointer;
+    text-align: center; font-family: var(--font-mono); font-size: .82rem; transition: .15s; background: #fff;
+}
+.class-chip:hover, .class-chip.selected { border-color: var(--amber); background: var(--amber-soft); }
+.class-chip .fare { font-weight: 700; color: var(--navy); font-size: .95rem; }
+.class-chip .seats { color: var(--track); font-size: .72rem; }
+
+/* ---------- Status badges ---------- */
+.badge { display: inline-block; padding: 4px 10px; border-radius: 6px; font-size: .78rem; font-weight: 600; font-family: var(--font-mono); }
+.badge-confirmed { background: #E2F3E9; color: var(--track); }
+.badge-waitlist { background: #FBEAE5; color: var(--danger); }
+.badge-rac { background: var(--amber-soft); color: #A05A0F; }
+
+/* ---------- Progress track (live tracking) ---------- */
+.track-wrap { margin: 22px 0; }
+.track-line { position: relative; height: 6px; background: var(--line); border-radius: 4px; }
+.track-fill { position: absolute; left: 0; top: 0; height: 100%; background: var(--track); border-radius: 4px; transition: width .6s ease; }
+.track-dot {
+    position: absolute; top: 50%; transform: translate(-50%, -50%);
+    width: 18px; height: 18px; background: var(--amber); border: 3px solid var(--navy);
+    border-radius: 50%; transition: left .6s ease;
+}
+.track-labels { display: flex; justify-content: space-between; font-size: .8rem; color: var(--ink-soft); margin-top: 8px; }
+
+/* ---------- Food menu ---------- */
+.menu-category { margin-bottom: 26px; }
+.menu-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.menu-item:last-child { border-bottom: none; }
+.menu-item .name { font-weight: 500; }
+.menu-item .price { font-family: var(--font-mono); color: var(--ink-soft); margin-left: 10px; }
+.qty-control { display: flex; align-items: center; gap: 10px; }
+.qty-control button {
+    width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line);
+    background: #fff; cursor: pointer; font-weight: 700; font-size: 1rem; line-height: 1;
+}
+.qty-control button:hover { border-color: var(--amber); }
+.cart-bar {
+    position: sticky; bottom: 0; background: var(--navy); color: #fff;
+    border-radius: 12px; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center;
+    margin-top: 20px; box-shadow: var(--shadow);
+}
+
+/* ---------- Wallet ---------- */
+.wallet-balance-card {
+    background: linear-gradient(135deg, var(--navy), var(--steel));
+    color: #fff; border-radius: 16px; padding: 28px; margin-bottom: 22px;
+}
+.wallet-balance-card .label { font-size: .8rem; color: var(--amber); letter-spacing: .08em; text-transform: uppercase; }
+.wallet-balance-card .amount { font-family: var(--font-mono); font-size: 2.4rem; font-weight: 600; margin-top: 6px; }
+.txn-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: .92rem; }
+.txn-row:last-child { border-bottom: none; }
+.txn-row .amt.credit { color: var(--track); font-family: var(--font-mono); }
+.txn-row .amt.debit { color: var(--danger); font-family: var(--font-mono); }
+
+/* ---------- Complaints ---------- */
+.result-banner {
+    background: var(--amber-soft); border: 1px solid var(--amber); border-radius: var(--radius);
+    padding: 16px 20px; margin-top: 16px; display: none;
+}
+.result-banner.show { display: block; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+    position: fixed; inset: 0; background: rgba(11,31,58,.55);
+    z-index: 100; padding: 20px; overflow-y: auto;
+}
+
+/* ---------- My Bookings cards ---------- */
+.booking-card { margin-bottom: 14px; }
+.booking-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.booking-card-route { display: flex; align-items: center; gap: 10px; font-family: var(--font-mono); font-size: .88rem; color: var(--ink); margin-bottom: 8px; }
+.booking-card-route .dur { color: var(--ink-soft); font-size: .8rem; }
+.booking-card-meta { display: flex; gap: 16px; flex-wrap: wrap; font-size: .8rem; color: var(--ink-soft); border-top: 1px solid var(--line); padding-top: 8px; }
+
+/* ---------- Profile page ---------- */
+.profile-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.profile-row:last-child { border-bottom: none; }
+.profile-label { color: var(--ink-soft); font-size: .85rem; }
+
+/* ---------- Footer ---------- */
+.site-footer { text-align: center; padding: 26px; color: var(--ink-soft); font-size: .82rem; border-top: 1px solid var(--line); }

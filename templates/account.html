@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}You{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">Your Profile</p>
+<h1>{{ user.name }}</h1>
+
+<div class="card">
+    <div class="profile-row">
+        <span class="profile-label">Phone</span>
+        <span class="mono">{{ user.phone }}</span>
+    </div>
+    <div class="profile-row">
+        <span class="profile-label">Email</span>
+        <span>{{ user.email }}</span>
+    </div>
+    <div class="profile-row">
+        <span class="profile-label">Verification</span>
+        <span class="badge badge-confirmed">{{ "Verified" if user.verified else "Not Verified" }}</span>
+    </div>
+</div>
+
+<a href="{{ url_for('wallet') }}" class="card" style="display:flex; justify-content:space-between; align-items:center; margin-top:14px;">
+    <div>
+        <div class="profile-label">R-Wallet Balance</div>
+        <div class="mono" style="font-size:1.3rem; font-weight:600; color:var(--navy);">₹{{ "%.2f"|format(user.rwallet_balance) }}</div>
+    </div>
+    <span style="color:var(--amber); font-family:var(--font-display); font-weight:600;">Open →</span>
+</a>
+
+<div class="tile-grid" style="margin-top:20px;">
+    <a href="{{ url_for('my_bookings') }}" class="tile">
+        <span class="icon">🎟️</span>
+        <span class="label">My Bookings</span>
+    </a>
+    <a href="{{ url_for('complaints') }}" class="tile">
+        <span class="icon">📣</span>
+        <span class="label">Rail Madad</span>
+    </a>
+    <div class="tile" style="opacity:.6; cursor:not-allowed;">
+        <span class="icon">⚙️</span>
+        <span class="label">Settings</span>
+        <span class="sub">Not available in this demo</span>
+    </div>
+</div>
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:18px;">
+    This is a sample profile — there's no real account or login system.
+</p>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Food Order{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">E-Catering</p>
+<h1>Order Food to Your Seat</h1>
+
+<div class="card" style="margin-bottom:16px;">
+    <div class="field" style="max-width:220px;">
+        <label for="seatNumber">Coach / Seat Number</label>
+        <input type="text" id="seatNumber" placeholder="e.g. B4 / 22">
+    </div>
+</div>
+
+{% for category, items in menu.items() %}
+<div class="card menu-category">
+    <h3>{{ category }}</h3>
+    {% for item in items %}
+    <div class="menu-item" data-id="{{ item.id }}" data-name="{{ item.name }}" data-price="{{ item.price }}">
+        <div>
+            <span class="name">{{ item.name }}</span>
+            <span class="price">₹{{ item.price }}</span>
+        </div>
+        <div class="qty-control">
+            <button class="qty-minus">−</button>
+            <span class="qty-value">0</span>
+            <button class="qty-plus">+</button>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+
+<div class="cart-bar" id="cartBar" style="display:none;">
+    <span id="cartSummary">0 items · ₹0</span>
+    <button class="btn btn-primary" id="placeOrderBtn">Place Order</button>
+</div>
+
+<div class="result-banner" id="foodOrderResult"></div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    initFoodOrdering();
+</script>
+{% endblock %}

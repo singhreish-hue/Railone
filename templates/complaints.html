@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Rail Madad{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">Rail Madad</p>
+<h1>File a Complaint</h1>
+
+<div class="card">
+    <div class="form-row">
+        <div class="field">
+            <label for="complaintTrain">PNR / Train Number (optional)</label>
+            <input type="text" id="complaintTrain" placeholder="e.g. 12951">
+        </div>
+        <div class="field">
+            <label for="complaintCategory">Category</label>
+            <select id="complaintCategory">
+                {% for cat in categories %}
+                <option>{{ cat }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="field" style="margin-top:14px;">
+        <label for="complaintDetails">Details</label>
+        <textarea id="complaintDetails" rows="4" placeholder="Describe the issue..."></textarea>
+    </div>
+    <button class="btn btn-primary" id="submitComplaintBtn" style="margin-top:16px;">Submit Complaint</button>
+</div>
+
+<div class="result-banner" id="complaintResult"></div>
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:14px;">
+    This is a demo — the complaint isn't reported anywhere, it just shows a fake confirmation ID.
+</p>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    initComplaints();
+</script>
+{% endblock %}

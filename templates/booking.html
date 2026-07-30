@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Book Ticket{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">Ticket Booking</p>
+<h1>Search Trains</h1>
+
+<div class="card">
+    <form action="{{ url_for('booking_results') }}" method="get">
+        <div class="form-row">
+            <div class="field">
+                <label for="from">From</label>
+                <input type="text" id="from" name="from" value="New Delhi (NDLS)" required>
+            </div>
+            <div class="field">
+                <label for="to">To</label>
+                <input type="text" id="to" name="to" value="Mumbai Central (MMCT)" required>
+            </div>
+        </div>
+        <div class="form-row" style="margin-top:14px;">
+            <div class="field">
+                <label for="date">Date of Journey</label>
+                <input type="date" id="date" name="date">
+            </div>
+            <div class="field">
+                <label for="class">Class</label>
+                <select id="class" name="class">
+                    <option>All Classes</option>
+                    <option>Sleeper</option>
+                    <option>AC 3 Tier</option>
+                    <option>AC 2 Tier</option>
+                    <option>AC First Class</option>
+                    <option>Chair Car</option>
+                </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="margin-top:18px;">Search Trains</button>
+    </form>
+</div>
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:14px;">
+    This is a demo — results will always show the same sample trains, not real availability.
+</p>
+
+{% endblock %}

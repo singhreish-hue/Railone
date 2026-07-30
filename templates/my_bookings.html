@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}My Bookings{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">My Bookings</p>
+<h1>Your Ticket History</h1>
+
+{% for b in bookings %}
+<div class="card booking-card">
+    <div class="booking-card-top">
+        <div>
+            <div class="mono" style="font-size:.75rem; color:var(--ink-soft);">PNR: {{ b.pnr }}</div>
+            <div style="font-family:var(--font-display); font-weight:700; font-size:1.15rem; color:var(--navy);">{{ b.train_name }}</div>
+            <div class="mono" style="font-size:.78rem; color:var(--ink-soft);">#{{ b.train_number }}</div>
+        </div>
+        <span class="badge {{ 'badge-confirmed' if b.status in ['Confirmed','Completed'] else 'badge-waitlist' }}">{{ b.status }}</span>
+    </div>
+    <div class="booking-card-route">
+        <span>{{ b.from }}</span>
+        <span class="dur">──────→</span>
+        <span>{{ b.to }}</span>
+    </div>
+    <div class="booking-card-meta">
+        <span>{{ b.date }}</span>
+        <span>{{ b.class_label }}</span>
+        <span>Coach {{ b.coach }} / Seat {{ b.seat }}</span>
+    </div>
+</div>
+{% endfor %}
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:14px;">
+    These are sample bookings — hardcoded for demo purposes, not real booking history.
+</p>
+
+{% endblock %}

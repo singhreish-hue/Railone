@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}R-Wallet{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">R-Wallet</p>
+<h1>Balance & Transactions</h1>
+
+<div class="wallet-balance-card">
+    <div class="label">Available Balance</div>
+    <div class="amount mono">₹{{ "%.2f"|format(wallet.balance) }}</div>
+    <button class="btn btn-primary" style="margin-top:16px;">Add Money (Demo)</button>
+</div>
+
+<div class="card">
+    <h3>Recent Transactions</h3>
+    {% for txn in wallet.transactions %}
+    <div class="txn-row">
+        <div>
+            <div>{{ txn.desc }}</div>
+            <div class="mono" style="font-size:.75rem; color:var(--ink-soft);">{{ txn.date }}</div>
+        </div>
+        <div class="amt {{ txn.type }}">
+            {{ "+" if txn.type == "credit" else "−" }}₹{{ txn.amount|abs }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:14px;">
+    This is a demo wallet — no real money is involved, the "Add Money" button is for UI purposes only.
+</p>
+
+{% endblock %}

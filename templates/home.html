@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<p class="greeting">Hi, Guest!</p>
+<h2>Journey Planner</h2>
+<div class="planner-cards">
+    <a href="{{ url_for('booking') }}" class="planner-card">
+        <div class="art rehfhfhfserved">
+            <img src="{{ url_for('static', filename='image/pexels-antonio-garcia-prats-1579305-30807451.jpg') }}" alt="Reserved">
+        </div>
+        <span class="planner-label">Reserved</span>
+    </a>
+    <a href="{{ url_for('booking') }}" class="planner-card">
+        <div class="art unreserved">
+            <div class="art unreserved">
+    <img src="{{ url_for('static', filename='image/WhatsApp Image 2026-07-30 at 15.28.31.jpg') }}" alt="Unreserved">
+</div>
+        </div>
+        <span class="planner-label">Unreserved</span>
+    </a>
+    <a href="{{ url_for('booking') }}" class="planner-card">
+        <div class="art platform">
+            <img src="{{ url_for('static', filename='image/WhatsApp Image 2026-07-28 at 15.34.57.jpeg') }}" alt="Platform">
+        </div>
+        <span class="planner-label">Platform</span>
+    </a>
+</div>
+
+<h2>More Offerings</h2>
+<div class="offerings-grid">
+    <a href="{{ url_for('booking') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-pink-bg); color:var(--tile-pink-fg);">📍</div>
+        <span class="offering-label">Search Trains</span>
+    </a>
+    <a href="{{ url_for('pnr_page') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-green-bg); color:var(--tile-green-fg);">🎫</div>
+        <span class="offering-label">PNR Status</span>
+    </a>
+    <a href="{{ url_for('tracking') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-blue-bg); color:var(--tile-blue-fg);">🚆</div>
+        <span class="offering-label">Coach Position</span>
+    </a>
+    <a href="{{ url_for('tracking') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-cream-bg); color:var(--tile-cream-fg);">📡</div>
+        <span class="offering-label">Track Your Train</span>
+    </a>
+    <a href="{{ url_for('food') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-lavender-bg); color:var(--tile-lavender-fg);">🍱</div>
+        <span class="offering-label">Order Food</span>
+    </a>
+    <a href="{{ url_for('complaints') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-gray-bg); color:var(--tile-gray-fg);">🎟️</div>
+        <span class="offering-label">File Refund</span>
+    </a>
+    <a href="{{ url_for('complaints') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-rose-bg); color:var(--tile-rose-fg);">🤝</div>
+        <span class="offering-label">Rail Madad</span>
+    </a>
+    <a href="{{ url_for('wallet') }}" class="offering-tile">
+        <div class="art" style="background:var(--tile-dark-bg); color:var(--tile-dark-fg);">💠</div>
+        <span class="offering-label">Go To WAVES</span>
+    </a>
+</div>
+
+<h2>Do You Know?</h2>
+<div class="know-scroll">
+    <div class="know-card">
+        <div class="art" style="background:linear-gradient(135deg,#555,#222); color:#fff;">🚂</div>
+        <p>Bharat ki pehli passenger train Bori Bandar se Thane ke beech, 16 April 1853 ko chali thi.</p>
+    </div>
+    <div class="know-card">
+        <div class="art" style="background:linear-gradient(135deg,#7EC8E3,#2E6DB4); color:#fff;">🌉</div>
+        <p>Chenab Railway Bridge duniya ka sabse ooncha railway bridge hai, jo Eiffel Tower se bhi ooncha hai.</p>
+    </div>
+    <div class="know-card">
+        <div class="art" style="background:linear-gradient(135deg,#8FD19E,#2E7D4F); color:#fff;">🚉</div>
+        <p>Indian Railways duniya ke sabse bade railway networks me se ek hai, jo lakhon logo ko roz safar karata hai.</p>
+    </div>
+</div>
+
+{% endblock %}

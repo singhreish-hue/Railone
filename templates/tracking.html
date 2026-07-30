@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Live Tracking{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">Live Train Tracking</p>
+<h1>Where Is My Train?</h1>
+
+<div class="card">
+    <div class="field" style="max-width:340px;">
+        <label for="trainSelect">Select Train</label>
+        <select id="trainSelect">
+            {% for t in trains %}
+            <option value="{{ t.number }}">#{{ t.number }} — {{ t.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <button class="btn btn-primary" id="trackBtn" style="margin-top:12px;">Track</button>
+</div>
+
+<div class="card" id="trackCard" style="display:none;">
+    <h3 id="trackTrainName">—</h3>
+    <div class="track-wrap">
+        <div class="track-line">
+            <div class="track-fill" id="trackFill" style="width:0%;"></div>
+            <div class="track-dot" id="trackDot" style="left:0%;"></div>
+        </div>
+        <div class="track-labels">
+            <span>Origin</span>
+            <span>Destination</span>
+        </div>
+    </div>
+    <div class="flap-board">
+        <div class="flap-field">
+            <span class="flap-label">Progress</span>
+            <span class="flap-value" id="trackProgress">—</span>
+        </div>
+        <div class="flap-field">
+            <span class="flap-label">Delay</span>
+            <span class="flap-value" id="trackDelay">—</span>
+        </div>
+        <div class="flap-field">
+            <span class="flap-label">Next Station</span>
+            <span class="flap-value" id="trackNextStation">—</span>
+        </div>
+        <div class="flap-field">
+            <span class="flap-label">ETA</span>
+            <span class="flap-value" id="trackEta">—</span>
+        </div>
+    </div>
+</div>
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:14px;">
+    This is a demo — position and delay are randomly generated, with no connection to GPS or real railway signals.
+</p>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    initTracking();
+</script>
+{% endblock %}

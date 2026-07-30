@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}PNR Status{% endblock %}
+{% block content %}
+
+<p class="section-eyebrow">PNR Status</p>
+<h1>Check Your Booking</h1>
+
+<div class="card">
+    <div class="form-row">
+        <div class="field" style="flex:2;">
+            <label for="pnrInput">10-digit PNR Number</label>
+            <input type="text" id="pnrInput" class="mono" maxlength="10" placeholder="e.g. 4815162342">
+        </div>
+    </div>
+    <button class="btn btn-primary" id="checkPnrBtn" style="margin-top:14px;">Check PNR</button>
+    <p id="pnrError" style="color:var(--danger); font-size:.85rem; margin-top:8px; display:none;"></p>
+</div>
+
+<div id="pnrResult" style="display:none; margin-top:16px;">
+    <div class="flap-board">
+        <div class="flap-field">
+            <span class="flap-label">Train</span>
+            <span class="flap-value" id="rTrain">—</span>
+        </div>
+        <div class="flap-field">
+            <span class="flap-label">Route</span>
+            <span class="flap-value" id="rRoute">—</span>
+        </div>
+        <div class="flap-field">
+            <span class="flap-label">Date</span>
+            <span class="flap-value" id="rDate">—</span>
+        </div>
+        <div class="flap-field">
+            <span class="flap-label">Coach / Seat</span>
+            <span class="flap-value" id="rSeat">—</span>
+        </div>
+    </div>
+    <div class="card">
+        <p style="margin:0;">Status: <span id="rStatus" class="badge"></span></p>
+    </div>
+</div>
+
+<p style="color:var(--ink-soft); font-size:.85rem; margin-top:14px;">
+    This is a demo — try any 10-digit number, the result will be consistent (but fake) every time, with no connection to a real PNR database.
+</p>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    initPnrChecker();
+</script>
+{% endblock %}
