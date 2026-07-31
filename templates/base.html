@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}RailClone{% endblock %} — Demo App</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
 
-    <div class="demo-banner">SAMPLE / DEMO APP — no real booking, payment, or railway data</div>
+   
 
     <header class="topbar">
         <a href="{{ url_for('home') }}" class="brand">
-            <span class="brand-name">Rail<span class="accent">Clone</span></span>
+            <span class="brand-name">Rail<span class="accent">one</span></span>
         </a>
         <span class="topbar-bell">🔔</span>
     </header>
@@ -23,9 +23,7 @@
         {% block content %}{% endblock %}
     </main>
 
-    <footer class="site-footer">
-        <p>RailClone — Demo/portfolio project. A UI clone inspired by Indian Railways' RailOne app. Not a real service.</p>
-    </footer>
+    
 
     <!-- ===== Slide-up "More" menu — remaining pages live here ===== -->
     <div class="menu-overlay" id="menuOverlay"></div>
